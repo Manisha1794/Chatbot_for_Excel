@@ -8,6 +8,7 @@ intents:
   - mood_great
   - mood_unhappy
   - get_total_amount
+  - bot_challenge
 
 entities:
   - quarter
@@ -22,37 +23,21 @@ slots:
   quarter:
     type: text
     mappings:
-     type: from_text
+      type: from_entity
+      entity: quarter
 
   week_number:
     type: text
-    mappings:
-     type: from_text
-
   date:
     type: text
-    mappings:
-     type: from_text
-
   amount_debit:
     type: float
-    mappings:
-     type: from_text
-
   amount_credit:
     type: float
-    mappings:
-     type: from_text
-
   category:
     type: text
-    mappings:
-     type: from_text
-
   comments:
     type: text
-    mappings:
-     type: from_text
 
 responses:
   utter_total_amount:
@@ -78,7 +63,7 @@ responses:
   - text: "I am a bot, powered by Rasa."
 
 actions:
-  - CustomActionGetTotalAmount
+  - custom_action_get_total_amount
 
 session_config:
   session_expiration_time: 240

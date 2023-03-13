@@ -2,7 +2,7 @@ import pandas as pd
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa.core.events import SlotSet, UserUtteranceReverted
+#from rasa.core.events import SlotSet, UserUtteranceReverted
 
 
 class CustomActionGetTotalAmount(Action):
@@ -13,7 +13,7 @@ class CustomActionGetTotalAmount(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # Load the data from the Excel file
-        df = pd.read_excel('data.xlsx')
+        df = pd.read_excel('C:/Users/monic/Desktop/test file.xlsx')
 
         # Get the slot values from the tracker
         quarter = tracker.get_slot('quarter')
