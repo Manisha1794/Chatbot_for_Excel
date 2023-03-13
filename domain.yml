@@ -1,0 +1,85 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - get_total_amount
+
+entities:
+  - quarter
+  - week_number
+  - date
+  - amount_debit
+  - amount_credit
+  - category
+  - comments
+
+slots:
+  quarter:
+    type: text
+    mappings:
+     type: from_text
+
+  week_number:
+    type: text
+    mappings:
+     type: from_text
+
+  date:
+    type: text
+    mappings:
+     type: from_text
+
+  amount_debit:
+    type: float
+    mappings:
+     type: from_text
+
+  amount_credit:
+    type: float
+    mappings:
+     type: from_text
+
+  category:
+    type: text
+    mappings:
+     type: from_text
+
+  comments:
+    type: text
+    mappings:
+     type: from_text
+
+responses:
+  utter_total_amount:
+  - text: "The total amount for {category} is {total_amount}."
+
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+actions:
+  - CustomActionGetTotalAmount
+
+session_config:
+  session_expiration_time: 240
+  carry_over_slots_to_new_session: true
