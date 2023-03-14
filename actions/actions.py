@@ -2,7 +2,7 @@ import pandas as pd
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-#from rasa.core.events import SlotSet, UserUtteranceReverted
+from rasa_sdk.events import AllSlotsReset, SlotSet, Restarted, UserUtteranceReverted
 
 
 class CustomActionGetTotalAmount(Action):
@@ -13,7 +13,7 @@ class CustomActionGetTotalAmount(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # Load the data from the Excel file
-        df = pd.read_excel('C:/Users/monic/Desktop/test file.xlsx')
+        df = pd.read_excel('D:\\Chatbot_for_Excel-master\\test_file.xlsx')
 
         # Get the slot values from the tracker
         quarter = tracker.get_slot('quarter')
@@ -28,7 +28,12 @@ class CustomActionGetTotalAmount(Action):
         filtered_df = df[df['Category'] == category]
 
         # Calculate the total amount for the specified category
-        total_amount = filtered_df['Amount Debit'].sum() - filtered
+        total_amount = filtered_df['Amount Debit'].sum() - filtered_df['Amount Credit'].sum()
+
+        dispatcher.utter_message(text=f"The result is {total_amount}")
+        return [SlotSet("amount_debit", filtered_df['Amount Debit'].sum()),
+        SlotSet("amount_credit", filtered_df['Amount Credit'].sum())]
+        print("I was called...")
 
 
 class ActionDefaultFallback(Action):

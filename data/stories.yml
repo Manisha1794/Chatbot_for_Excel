@@ -1,11 +1,11 @@
 version: "3.1"
 
 stories:
-
 - story: happy path
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_ask_operation
   - intent: mood_great
   - action: utter_happy
 
@@ -13,18 +13,60 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_ask_operation
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+  - intent: deny
+  - action: utter_goodbye
 
 - story: sad path 2
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_ask_operation
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
   - intent: deny
+  - action: utter_goodbye
+
+- story: User wants to perform a query
+  steps:
+  - intent: get_total_amount
+  - action: utter_ask_category
+  - intent: get_category
+    entities:
+    - category: "Credit Card"
+  - action: custom_action_get_total_amount
+  - action: utter_goodbye
+
+- story: User greets and wants to perform a query
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_operation
+  - intent: get_total_amount
+  - action: utter_ask_category
+  - intent: get_category
+    entities:
+    - category: "Credit Card"
+  - action: custom_action_get_total_amount
+  - action: utter_goodbye
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_operation
+  - intent: get_total_amount
+  - action: utter_ask_category
+  - intent: get_category
+    entities:
+    - category: Credit Card
+  - slot_was_set:
+    - category: Credit Card
+  - action: custom_action_get_total_amount
+  - action: utter_goodbye
+  - intent: goodbye
   - action: utter_goodbye

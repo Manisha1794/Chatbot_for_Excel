@@ -8,6 +8,7 @@ intents:
   - mood_great
   - mood_unhappy
   - get_total_amount
+  - get_category
   - bot_challenge
 
 entities:
@@ -23,25 +24,49 @@ slots:
   quarter:
     type: text
     mappings:
-      type: from_entity
+    - type: from_entity
       entity: quarter
 
   week_number:
     type: text
+    mappings:
+    - type: from_entity
+      entity: week_number
   date:
     type: text
+    mappings:
+    - type: from_entity
+      entity: date
   amount_debit:
     type: float
+    mappings:
+    - type: from_entity
+      entity: amount_debit
   amount_credit:
     type: float
+    mappings:
+    - type: from_entity
+      entity: amount_credit
   category:
     type: text
+    mappings:
+    - type: from_entity
+      entity: category
   comments:
     type: text
+    mappings:
+    - type: from_entity
+      entity: comments
 
 responses:
   utter_total_amount:
   - text: "The total amount for {category} is {total_amount}."
+
+  utter_ask_operation:
+  - text: "What do you want me to do?"
+
+  utter_ask_category:
+  - text: Please provide the category
 
   utter_greet:
   - text: "Hey! How are you?"
@@ -63,6 +88,14 @@ responses:
   - text: "I am a bot, powered by Rasa."
 
 actions:
+  - utter_total_amount
+  - utter_ask_operation
+  - utter_greet
+  - utter_cheer_up
+  - utter_did_that_help
+  - utter_happy
+  - utter_goodbye
+  - utter_iamabot
   - custom_action_get_total_amount
 
 session_config:

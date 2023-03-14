@@ -1,7 +1,6 @@
 version: "3.1"
 
 rules:
-
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
@@ -11,3 +10,32 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Respond to greet intent and ask operation
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_ask_operation
+
+- rule: Respond to goodbye intent
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Respond to affirm intent
+  steps:
+  - intent: affirm
+  - action: utter_happy
+
+- rule: Respond to deny intent
+  steps:
+  - intent: deny
+  - action: utter_goodbye
+
+- rule: Perform query operation
+  steps:
+  - intent: get_total_amount
+  - action: utter_ask_category
+  - slot_was_set:
+    - category: "get_category"
+  wait_for_user_input: false
