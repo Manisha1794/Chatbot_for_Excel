@@ -92,3 +92,5 @@ nlu:
 - intent: get_category
   examples: |
     - [Credit Card](category)
+    - [Grocery](category)
+    - [Online Shopping](category)

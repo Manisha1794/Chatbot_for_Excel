@@ -26,7 +26,6 @@ slots:
     mappings:
     - type: from_entity
       entity: quarter
-
   week_number:
     type: text
     mappings:
@@ -38,12 +37,12 @@ slots:
     - type: from_entity
       entity: date
   amount_debit:
-    type: float
+    type: text
     mappings:
     - type: from_entity
       entity: amount_debit
   amount_credit:
-    type: float
+    type: text
     mappings:
     - type: from_entity
       entity: amount_credit
@@ -90,6 +89,7 @@ responses:
 actions:
   - utter_total_amount
   - utter_ask_operation
+  - utter_ask_category
   - utter_greet
   - utter_cheer_up
   - utter_did_that_help

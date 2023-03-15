@@ -1,3 +1,4 @@
+from re import template
 import pandas as pd
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
@@ -26,14 +27,17 @@ class CustomActionGetTotalAmount(Action):
 
         # Filter the data by the specified category
         filtered_df = df[df['Category'] == category]
+        print("sum 1...", filtered_df['Amount Debit'].sum())
+        print("sum 2...", filtered_df['Amount Credit'].sum())
 
         # Calculate the total amount for the specified category
         total_amount = filtered_df['Amount Debit'].sum() - filtered_df['Amount Credit'].sum()
 
-        dispatcher.utter_message(text=f"The result is {total_amount}")
-        return [SlotSet("amount_debit", filtered_df['Amount Debit'].sum()),
-        SlotSet("amount_credit", filtered_df['Amount Credit'].sum())]
-        print("I was called...")
+        dispatcher.utter_message(response=total_amount)
+        print("total sum...", total_amount)
+
+        return [SlotSet("amount_debit", str(sum(filtered_df['Amount Debit']))),
+        SlotSet("amount_credit", str(sum(filtered_df['Amount Credit'])))]
 
 
 class ActionDefaultFallback(Action):
